@@ -13,12 +13,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build APK with official Buildozer Docker
+      - name: Build APK
         run: |
-          mkdir -p "$HOME/.buildozer"
-
           docker run --rm \
-            -v "$HOME/.buildozer:/home/user/.buildozer" \
             -v "$GITHUB_WORKSPACE:/home/user/hostcwd" \
             kivy/buildozer:latest \
             android debug
