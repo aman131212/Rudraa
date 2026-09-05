@@ -1,28 +1,31 @@
-name: Build Rudraa APK
+[app]
 
-on:
-  workflow_dispatch:
-  push:
-    branches: [main]
+title = Rudraa
+package.name = rudra
+package.domain = org.aman
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+source.dir = .
+source.include_exts = py,png,jpg,jpeg,kv,atlas,json
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+version = 0.1
 
-      - name: Build APK
-        run: |
-          docker run --rm \
-            -v "$GITHUB_WORKSPACE:/home/user/hostcwd" \
-            kivy/buildozer:latest \
-            android debug
+requirements = python3,kivy
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: Rudraa-APK
-          path: bin/*.apk
-          if-no-files-found: error
+orientation = portrait
+fullscreen = 0
+
+android.api = 34
+android.minapi = 23
+android.build_tools_version = 36.0.0
+
+android.accept_sdk_license = True
+android.permissions = INTERNET
+
+android.archs = arm64-v8a
+
+android.allow_backup = True
+
+[buildozer]
+
+log_level = 2
+warn_on_root = 1
